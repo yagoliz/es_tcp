@@ -1,0 +1,1 @@
+KERNEL=="ttyACM0", SYMLINK+="esenseconv", GROUP="electrosense", MODE="0660"
