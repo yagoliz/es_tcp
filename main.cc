@@ -88,7 +88,8 @@ static volatile int do_exit = 0;
 void usage(void)
 {
   printf("es_tcp, an I/Q spectrum server for RTL2832 based DVB-T receivers\n\n"
-         "Usage:\t[-a Listen address]\n"
+         "Usage: \t[-h Show this menu]\n"
+         "\t[-a Listen address]\n"
          "\t[-c Converter path (default: /dev/ttyACM0)"
          "\t[-p Listen port (default: 1234)]\n"
          "\t[-f Frequency to tune to [Hz]]\n"
@@ -99,7 +100,6 @@ void usage(void)
          "\t[-d Device index (default: 0)]\n"
          "\t[-P PPM error (default: 0)]\n"
          "\t[-T Enable bias-T on GPIO PIN 0 (works for rtl-sdr.com v3 dongles)]\n");
-  exit(1);
 }
 
 static void sighandler(int signum)
@@ -363,7 +363,7 @@ int main(int argc, char **argv)
   int r, opt, i;
   char *addr = "127.0.0.1";
   char *port = "1234";
-  std::string converter_path = "/dev/esenseconv";
+  std::string converter_path = "/dev/ttyACM0";
   uint32_t frequency = 100000000, samp_rate = 2048000;
   struct sockaddr_storage local, remote;
   struct addrinfo *ai;
@@ -392,7 +392,7 @@ int main(int argc, char **argv)
 
   struct sigaction sigact, sigign;
 
-  while ((opt = getopt(argc, argv, "a:c:p:f:g:s:b:n:d:P:T")) != -1) {
+  while ((opt = getopt(argc, argv, "a:c:p:f:g:s:b:n:d:P:Th")) != -1) {
     switch (opt) {
       case 'd':
         dev_index = verbose_device_search(optarg);
@@ -422,6 +422,10 @@ int main(int argc, char **argv)
       case 'n':
         llbuf_num = atoi(optarg);
         break;
+      case 'h':
+        usage();
+        exit(0);
+        break;
       case 'P':
         ppm_error = atoi(optarg);
         break;
@@ -434,8 +438,10 @@ int main(int argc, char **argv)
     }
   }
 
-  if (argc < optind)
+  if (argc < optind) {
     usage();
+    exit(1);
+  }
 
   if (!dev_given) {
     dev_index = verbose_device_search("0");
