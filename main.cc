@@ -114,6 +114,11 @@ void rtlsdr_callback(unsigned char *buf, uint32_t len, void *ctx)
   if(!do_exit) {
     struct llist *rpt = (struct llist*)malloc(sizeof(struct llist));
     rpt->data = (char*)malloc(len);
+    if (mustInvert) {
+      for (int i = 0; i < len; i += 2) {
+        buf[i] = 255 - buf[i];
+      }
+    }
     memcpy(rpt->data, buf, len);
     rpt->len = len;
     rpt->next = NULL;
@@ -358,7 +363,7 @@ int main(int argc, char **argv)
   int r, opt, i;
   char *addr = "127.0.0.1";
   char *port = "1234";
-  std::string converter_path = "/dev/ttyACM0";
+  std::string converter_path = "/dev/esenseconv";
   uint32_t frequency = 100000000, samp_rate = 2048000;
   struct sockaddr_storage local, remote;
   struct addrinfo *ai;
