@@ -17,6 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * es_tcp: This version was modified to support Electrosense's downconverter
+ * and reach frequencies up to 6 GHz
+ *
+ * Author: Yago Lizarribar
+ * Email: yago.lizarribar@gmail.com
+ */
+
 #include <iostream>
 #include <string>
 #include <errno.h>

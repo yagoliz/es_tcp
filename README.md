@@ -1,6 +1,6 @@
 # es_tcp: Reaching higher frequencies with RTL-SDR
 
-**es\_tcp** is a modification of the well known [**rtl_tcp**](https://github.com/pinkavaj/rtl-sdr/blob/master/src/rtl_tcp.c) utility that can extend the frequency range of the RTL-SDR from 0-6 GHz.
+**es\_tcp** is a modification of the well known [**rtl_tcp**](https://github.com/pinkavaj/rtl-sdr/blob/master/src/rtl_tcp.c) utility that can extend the frequency range of the RTL-SDR from 0-6 GHz. This project also takes inspiration (and the files under ```converter/``` files) from this other great project: [**es_sensor**](https://github.com/electrosense/es-sensor)
 
 Tested with GQRX in Debian (sid). Note: You will need to enable the **No Limits** check box in order to reach higher frequencies than the default 1766 MHz.
 
