@@ -43,7 +43,8 @@ make -j$(nproc)
 
 ```bash
 Usage:  [-a Listen address]
-        [-c Converter path (default: /dev/ttyACM0)      [-p Listen port (default: 1234)]
+        [-c Converter path (default: /dev/ttyACM0)      
+        [-p Listen port (default: 1234)]
         [-f Frequency to tune to [Hz]]
         [-g Gain (default: 0 for auto)]
         [-s Sample rate in Hz (default: 2048000 Hz)]
